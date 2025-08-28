@@ -48,7 +48,7 @@
   - Masking rules applied based on role and classification in sample flows
   - Audit logs recorded for key actions and are tamper-evident
 
-## Milestone 6: Frontend UI & Visualizations (Weeks 17-20)
+## Milestone 6: Frontend UI & Visualizations ✅ COMPLETED
 - Deliverables:
   - React/Vue app shell, design system, and routing
   - Interactive DAG lineage graph (zoom, pan, node detail)
