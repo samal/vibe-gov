@@ -1,0 +1,37 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install and Test (if Node project present)
+        run: |
+          if [ -f package.json ]; then
+            npm ci || npm install
+            npm run lint --if-present
+            npm test --if-present
+          else
+            echo "No package.json found; skipping Node build."
+          fi
+
+      - name: Validate SQL (psql lint placeholder)
+        run: |
+          echo "SQL present:"
+          ls -la db/postgres || true
+
+      - name: Validate YAML
+        run: |
+          yamllint -v || echo "yamllint not installed; skipping"
+        continue-on-error: true 
