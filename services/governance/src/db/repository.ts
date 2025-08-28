@@ -96,7 +96,17 @@ export class GovernanceRepository {
   // Masking rules
   async getMaskingRules(): Promise<MaskingRule[]> {
     const result = await this.pool.query('SELECT * FROM masking_rules ORDER BY name');
-    return result.rows;
+    return result.rows.map(row => ({
+      id: row.id,
+      name: row.name,
+      classificationKey: row.classification_key,
+      roleId: row.role_id,
+      maskingType: row.masking_type,
+      maskingConfig: row.masking_config,
+      enabled: row.enabled,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    }));
   }
 
   async createMaskingRule(rule: Omit<MaskingRule, 'id'>): Promise<MaskingRule> {

@@ -1,5 +1,5 @@
 import Fastify from 'fastify';
-import { registerLineageRoutes } from './routes/lineage';
+import { registerLineageRoutes } from './routes/lineage.js';
 
 const app = Fastify({ logger: true });
 

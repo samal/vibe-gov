@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
 import neo4j from 'neo4j-driver';
-import { parseSqlToLineage } from '../lineage/parser';
+import { parseSqlToLineage } from '../lineage/parser.js';
 
 export async function registerLineageRoutes(app: FastifyInstance) {
   app.post('/lineage/parse', async (request, reply) => {

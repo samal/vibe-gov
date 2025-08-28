@@ -29,6 +29,9 @@ export async function registerMaskingRoutes(app: FastifyInstance) {
     maskingEngine.setRules(rules);
   }
 
+  // Initialize masking engine on startup
+  await refreshMaskingRules();
+
   // Get all masking rules
   app.get('/masking/rules', async (request, reply) => {
     const authHeader = request.headers.authorization;
