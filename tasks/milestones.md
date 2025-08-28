@@ -38,7 +38,7 @@
   - Given example SQL/view/ETL, engine produces correct upstream/downstream graph
   - Versioned lineage retrieval under 500ms P95 for typical queries
 
-## Milestone 5: Governance, Security, and Auditing (Weeks 13-16)
+## Milestone 5: Governance, Security, and Auditing ✅ COMPLETED
 - Deliverables:
   - RBAC with SSO (SAML/OAuth2) integration
   - Data classification/tagging APIs and masking rule engine/proxy
