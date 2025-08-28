@@ -6,6 +6,7 @@ import { Dashboard } from './pages/Dashboard';
 import { DataCatalog } from './pages/DataCatalog';
 import { LineageGraphPage } from './pages/LineageGraph';
 import { Governance } from './pages/Governance';
+import { Settings } from './pages/Settings';
 import { useAuthStore } from './stores/auth';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -53,15 +54,7 @@ export default function App() {
       
       <Route path="/settings" element={
         <ProtectedRoute>
-          <div className="space-y-6">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
-              <p className="text-gray-600">Platform configuration and preferences</p>
-            </div>
-            <div className="card">
-              <p className="text-gray-600">Settings features coming soon...</p>
-            </div>
-          </div>
+          <Settings />
         </ProtectedRoute>
       } />
       
