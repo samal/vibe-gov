@@ -1,6 +1,6 @@
 # LineageNexus Milestones
 
-## Milestone 1: Architecture & Platform Foundations (Weeks 1-2)
+## Milestone 1: Architecture & Platform Foundations ✅ COMPLETED
 - Deliverables:
   - Architecture document with microservice boundaries and data flows
   - Tech stack selections (NestJS/Fastify, shared libs, TypeScript config)
@@ -11,7 +11,7 @@
   - `docker compose up` brings up core infra locally
   - CI builds, lints, and runs unit tests on PRs
 
-## Milestone 2: Service Scaffolds & Messaging (Weeks 3-4)
+## Milestone 2: Service Scaffolds & Messaging ✅ COMPLETED
 - Deliverables:
   - Scaffolds for services: Connectors, Ingestion, Lineage API, Governance, Web UI
   - Messaging broker (Kafka/RabbitMQ) topics/queues and contracts defined
@@ -20,7 +20,7 @@
   - Services build and run independently; health endpoints pass
   - Basic e2e: sample metadata event flows from Connectors -> Ingestion -> Storage
 
-## Milestone 3: Connector Framework & Initial Connectors (Weeks 5-8)
+## Milestone 3: Connector Framework & Initial Connectors ✅ COMPLETED
 - Deliverables:
   - Universal connector SDK (interfaces, lifecycle, auth, scheduling)
   - Connectors: PostgreSQL, MySQL, SQL Server, MongoDB, Kafka, Tableau
@@ -29,7 +29,7 @@
   - Each connector ingests schemas/tables/columns and emits metadata events
   - Tableau connector extracts report/dashboard dependencies
 
-## Milestone 4: Lineage Engine & APIs (Weeks 9-12)
+## Milestone 4: Lineage Engine & APIs ✅ COMPLETED
 - Deliverables:
   - SQL parsing pipeline and dependency mapping to column-level lineage
   - Lineage versioning and history APIs
