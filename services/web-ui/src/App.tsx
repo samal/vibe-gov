@@ -5,6 +5,7 @@ import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
 import { DataCatalog } from './pages/DataCatalog';
 import { LineageGraphPage } from './pages/LineageGraph';
+import { Governance } from './pages/Governance';
 import { useAuthStore } from './stores/auth';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -46,15 +47,7 @@ export default function App() {
       
       <Route path="/governance" element={
         <ProtectedRoute>
-          <div className="space-y-6">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Governance</h1>
-              <p className="text-gray-600">Data governance and policy management</p>
-            </div>
-            <div className="card">
-              <p className="text-gray-600">Governance features coming soon...</p>
-            </div>
-          </div>
+          <Governance />
         </ProtectedRoute>
       } />
       
