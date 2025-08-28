@@ -145,63 +145,29 @@ export const governanceAPI = {
   },
 };
 
-// Mock data for development
-export const mockAPI = {
+// Assets API
+export const assetsAPI = {
   getAssets: async (): Promise<DataAsset[]> => {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    return [
-      {
-        id: 'pg.public.users',
-        name: 'users',
-        namespace: 'public',
-        sourceSystem: 'postgres',
-        assetType: 'TABLE',
-        schema: {
-          columns: [
-            { name: 'id', dataType: 'int4', classification: 'PII' },
-            { name: 'email', dataType: 'varchar', classification: 'PII' },
-            { name: 'name', dataType: 'varchar', classification: 'PII' },
-            { name: 'created_at', dataType: 'timestamp' },
-          ],
-        },
-        owners: ['admin@lineage.com'],
-        updatedAt: '2025-01-15T10:30:00Z',
-      },
-      {
-        id: 'pg.public.orders',
-        name: 'orders',
-        namespace: 'public',
-        sourceSystem: 'postgres',
-        assetType: 'TABLE',
-        schema: {
-          columns: [
-            { name: 'id', dataType: 'int4' },
-            { name: 'user_id', dataType: 'int4' },
-            { name: 'amount', dataType: 'decimal', classification: 'FINANCIAL' },
-            { name: 'status', dataType: 'varchar' },
-          ],
-        },
-        owners: ['admin@lineage.com'],
-        updatedAt: '2025-01-15T10:30:00Z',
-      },
-      {
-        id: 'pg.public.user_summary',
-        name: 'user_summary',
-        namespace: 'public',
-        sourceSystem: 'postgres',
-        assetType: 'VIEW',
-        schema: {
-          columns: [
-            { name: 'user_id', dataType: 'int4' },
-            { name: 'total_orders', dataType: 'int4' },
-            { name: 'total_amount', dataType: 'decimal', classification: 'FINANCIAL' },
-          ],
-        },
-        owners: ['admin@lineage.com'],
-        updatedAt: '2025-01-15T10:30:00Z',
-      },
-    ];
+    const response = await api.get('/assets');
+    return response.data;
+  },
+
+  getAssetById: async (id: string): Promise<DataAsset> => {
+    const response = await api.get(`/assets/${id}`);
+    return response.data;
+  },
+
+  createAsset: async (asset: Omit<DataAsset, 'id' | 'updatedAt'>): Promise<DataAsset> => {
+    const response = await api.post('/assets', asset);
+    return response.data;
+  },
+
+  updateAsset: async (id: string, updates: Partial<DataAsset>): Promise<DataAsset> => {
+    const response = await api.put(`/assets/${id}`, updates);
+    return response.data;
+  },
+
+  deleteAsset: async (id: string): Promise<void> => {
+    await api.delete(`/assets/${id}`);
   },
 };

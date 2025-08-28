@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Search, Filter, Database } from 'lucide-react';
-import { mockAPI, governanceAPI } from '../lib/api';
+import { assetsAPI, governanceAPI } from '../lib/api';
 import { AssetCard } from '../components/AssetCard';
 import { DataAsset, DataClassification } from '../types';
 import { getClassificationColor } from '../lib/utils';
@@ -13,7 +13,7 @@ export function DataCatalog() {
 
   const { data: assets = [], isLoading } = useQuery<DataAsset[]>({
     queryKey: ['assets'],
-    queryFn: mockAPI.getAssets,
+    queryFn: assetsAPI.getAssets,
   });
 
   const { data: classifications = [] } = useQuery<DataClassification[]>({

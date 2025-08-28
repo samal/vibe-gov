@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Play } from 'lucide-react';
 import { LineageGraph as LineageGraphComponent } from '../components/LineageGraph';
-import { lineageAPI, mockAPI } from '../lib/api';
+import { lineageAPI, assetsAPI } from '../lib/api';
 import { LineageGraph, DataAsset } from '../types';
 
 export function LineageGraphPage() {
@@ -12,7 +12,7 @@ export function LineageGraphPage() {
 
   const { data: assets = [] } = useQuery<DataAsset[]>({
     queryKey: ['assets'],
-    queryFn: mockAPI.getAssets,
+    queryFn: assetsAPI.getAssets,
   });
 
   const { data: lineageData, isLoading } = useQuery<LineageGraph>({

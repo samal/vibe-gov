@@ -150,6 +150,90 @@ export class GovernanceRepository {
     return result.rows[0];
   }
 
+  // Data Assets
+  async getDataAssets(): Promise<any[]> {
+    const result = await this.pool.query('SELECT * FROM data_assets ORDER BY name');
+    return result.rows.map(row => ({
+      id: row.id,
+      name: row.name,
+      namespace: row.namespace,
+      sourceSystem: row.source_system,
+      assetType: row.asset_type,
+      schema: row.schema,
+      owners: row.owners,
+      updatedAt: row.updated_at,
+    }));
+  }
+
+  async getDataAssetById(id: string): Promise<any | null> {
+    const result = await this.pool.query('SELECT * FROM data_assets WHERE id = $1', [id]);
+    if (result.rows.length === 0) return null;
+    
+    const row = result.rows[0];
+    return {
+      id: row.id,
+      name: row.name,
+      namespace: row.namespace,
+      sourceSystem: row.source_system,
+      assetType: row.asset_type,
+      schema: row.schema,
+      owners: row.owners,
+      updatedAt: row.updated_at,
+    };
+  }
+
+  async createDataAsset(asset: any): Promise<any> {
+    const id = `${asset.sourceSystem}.${asset.namespace}.${asset.name}`;
+    const result = await this.pool.query(
+      'INSERT INTO data_assets (id, name, namespace, source_system, asset_type, schema, owners) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+      [id, asset.name, asset.namespace, asset.sourceSystem, asset.assetType, JSON.stringify(asset.schema), JSON.stringify(asset.owners)]
+    );
+    
+    const row = result.rows[0];
+    return {
+      id: row.id,
+      name: row.name,
+      namespace: row.namespace,
+      sourceSystem: row.source_system,
+      assetType: row.asset_type,
+      schema: row.schema,
+      owners: row.owners,
+      updatedAt: row.updated_at,
+    };
+  }
+
+  async updateDataAsset(id: string, updates: any): Promise<any> {
+    const fields = Object.keys(updates).filter(key => key !== 'id');
+    const values = Object.values(updates);
+    const setClause = fields.map((_, i) => {
+      const field = fields[i];
+      const dbField = field === 'sourceSystem' ? 'source_system' : 
+                     field === 'assetType' ? 'asset_type' : field;
+      return `${dbField} = $${i + 2}`;
+    }).join(', ');
+    
+    const result = await this.pool.query(
+      `UPDATE data_assets SET ${setClause}, updated_at = NOW() WHERE id = $1 RETURNING *`,
+      [id, ...values]
+    );
+    
+    const row = result.rows[0];
+    return {
+      id: row.id,
+      name: row.name,
+      namespace: row.namespace,
+      sourceSystem: row.source_system,
+      assetType: row.asset_type,
+      schema: row.schema,
+      owners: row.owners,
+      updatedAt: row.updated_at,
+    };
+  }
+
+  async deleteDataAsset(id: string): Promise<void> {
+    await this.pool.query('DELETE FROM data_assets WHERE id = $1', [id]);
+  }
+
   async getAuditEvents(filters: {
     entityType?: string;
     entityId?: string;

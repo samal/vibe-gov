@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { Database, GitBranch, Shield, Activity } from 'lucide-react';
-import { mockAPI, governanceAPI } from '../lib/api';
+import { assetsAPI, governanceAPI } from '../lib/api';
 import { AssetCard } from '../components/AssetCard';
 import { DataAsset } from '../types';
 
 export function Dashboard() {
   const { data: assets = [] } = useQuery<DataAsset[]>({
     queryKey: ['assets'],
-    queryFn: mockAPI.getAssets,
+    queryFn: assetsAPI.getAssets,
   });
 
   const { data: auditSummary } = useQuery({

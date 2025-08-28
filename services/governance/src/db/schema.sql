@@ -63,3 +63,29 @@ INSERT INTO roles (name, description) VALUES
   ('ANALYST', 'Data analyst with read access'),
   ('VIEWER', 'Read-only access to lineage and catalog')
 ON CONFLICT (name) DO NOTHING;
+
+-- Data assets table
+CREATE TABLE IF NOT EXISTS data_assets (
+  id VARCHAR(256) PRIMARY KEY,
+  name VARCHAR(128) NOT NULL,
+  namespace VARCHAR(128) NOT NULL,
+  source_system VARCHAR(64) NOT NULL,
+  asset_type VARCHAR(32) NOT NULL CHECK (asset_type IN ('TABLE', 'VIEW', 'COLUMN', 'REPORT')),
+  schema JSONB,
+  owners JSONB,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Insert sample data assets
+INSERT INTO data_assets (id, name, namespace, source_system, asset_type, schema, owners) VALUES 
+  ('pg.public.users', 'users', 'public', 'postgres', 'TABLE', 
+   '{"columns": [{"name": "id", "dataType": "int4", "classification": "PII"}, {"name": "email", "dataType": "varchar", "classification": "PII"}, {"name": "name", "dataType": "varchar", "classification": "PII"}, {"name": "created_at", "dataType": "timestamp"}]}',
+   '["admin@lineage.com"]'),
+  ('pg.public.orders', 'orders', 'public', 'postgres', 'TABLE',
+   '{"columns": [{"name": "id", "dataType": "int4"}, {"name": "user_id", "dataType": "int4"}, {"name": "amount", "dataType": "decimal", "classification": "FINANCIAL"}, {"name": "status", "dataType": "varchar"}]}',
+   '["admin@lineage.com"]'),
+  ('pg.public.user_summary', 'user_summary', 'public', 'postgres', 'VIEW',
+   '{"columns": [{"name": "user_id", "dataType": "int4"}, {"name": "total_orders", "dataType": "int4"}, {"name": "total_amount", "dataType": "decimal", "classification": "FINANCIAL"}]}',
+   '["admin@lineage.com"]')
+ON CONFLICT (id) DO NOTHING;

@@ -3,6 +3,7 @@ import { registerAuthRoutes } from './routes/auth.js';
 import { registerClassificationRoutes } from './routes/classifications.js';
 import { registerMaskingRoutes } from './routes/masking.js';
 import { registerAuditRoutes } from './routes/audit.js';
+import { registerAssetRoutes } from './routes/assets.js';
 
 const app = Fastify({ 
   logger: true,
@@ -17,6 +18,7 @@ app.register(registerAuthRoutes, { prefix: '/api/v1' });
 app.register(registerClassificationRoutes, { prefix: '/api/v1' });
 app.register(registerMaskingRoutes, { prefix: '/api/v1' });
 app.register(registerAuditRoutes, { prefix: '/api/v1' });
+app.register(registerAssetRoutes, { prefix: '/api/v1' });
 
 // Error handler
 app.setErrorHandler((error, request, reply) => {
