@@ -64,19 +64,10 @@ export const lineageAPI = {
     return response.data;
   },
 
-  getLineageGraph: async (assetId: string): Promise<LineageGraph> => {
-    // Mock data for now - would be replaced with actual API call
-    return {
-      nodes: [
-        { id: assetId, name: 'Sample Asset', type: 'TABLE', namespace: 'public', sourceSystem: 'postgres' },
-        { id: 'upstream1', name: 'Upstream Table 1', type: 'TABLE', namespace: 'public', sourceSystem: 'postgres' },
-        { id: 'upstream2', name: 'Upstream Table 2', type: 'TABLE', namespace: 'public', sourceSystem: 'postgres' },
-      ],
-      edges: [
-        { source: 'upstream1', target: assetId, type: 'FLOWS_TO' },
-        { source: 'upstream2', target: assetId, type: 'FLOWS_TO' },
-      ],
-    };
+  getLineageGraph: async (assetId?: string): Promise<LineageGraph> => {
+    const params = assetId ? { assetId } : {};
+    const response = await axios.get('/lineage-api/lineage/graph', { params });
+    return response.data;
   },
 };
 
