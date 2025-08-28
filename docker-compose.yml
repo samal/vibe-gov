@@ -100,6 +100,17 @@ services:
     ports:
       - '3004:3004'
 
+  web-ui:
+    build: ./services/web-ui
+    container_name: lineage_web_ui
+    depends_on:
+      governance:
+        condition: service_started
+      lineage_api:
+        condition: service_started
+    ports:
+      - '3005:3005'
+
 volumes:
   postgres_data:
   neo4j_data:
