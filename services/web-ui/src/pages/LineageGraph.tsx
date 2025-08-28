@@ -18,8 +18,10 @@ export function LineageGraphPage() {
   const { data: lineageData, isLoading } = useQuery<LineageGraph>({
     queryKey: ['lineage', selectedAssetId],
     queryFn: () => lineageAPI.getLineageGraph(selectedAssetId),
-    enabled: !!selectedAssetId,
+    enabled: true, // Always enabled to show all lineage data
   });
+
+
 
   const handleAssetSelect = (assetId: string) => {
     setSelectedAssetId(assetId);

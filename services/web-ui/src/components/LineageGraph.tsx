@@ -11,11 +11,14 @@ export function LineageGraph({ data, onNodeClick, onNodeHover }: LineageGraphPro
   const [cy, setCy] = useState<cytoscape.Core | null>(null);
   const [selectedNode, setSelectedNode] = useState<LineageNode | null>(null);
 
+
+
   useEffect(() => {
     if (!cyRef.current || !data) return;
 
-    // Create cytoscape instance
-    const cyInstance = cytoscape({
+    try {
+      // Create cytoscape instance
+      const cyInstance = cytoscape({
       container: cyRef.current,
       elements: {
         nodes: data.nodes.map(node => ({
@@ -158,11 +161,14 @@ export function LineageGraph({ data, onNodeClick, onNodeHover }: LineageGraphPro
       onNodeHover?.(null);
     });
 
-    setCy(cyInstance);
+      setCy(cyInstance);
 
-    return () => {
-      cyInstance.destroy();
-    };
+      return () => {
+        cyInstance.destroy();
+      };
+    } catch (error) {
+      console.error('Error creating cytoscape instance:', error);
+    }
   }, [data, onNodeClick, onNodeHover]);
 
   useEffect(() => {
@@ -173,7 +179,44 @@ export function LineageGraph({ data, onNodeClick, onNodeHover }: LineageGraphPro
 
   return (
     <div className="w-full h-full min-h-[600px] bg-white rounded-lg border border-gray-200">
-      <div ref={cyRef} className="w-full h-full" />
+      {!data || data.nodes.length === 0 ? (
+        <div className="flex items-center justify-center h-full min-h-[600px]">
+          <div className="text-center">
+            <div className="text-gray-400 text-lg mb-2">No lineage data available</div>
+            <div className="text-gray-500 text-sm">Select an asset or add lineage data to see the visualization</div>
+          </div>
+        </div>
+      ) : (
+        <div className="p-4">
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold mb-2">Lineage Data (Debug View)</h3>
+            <div className="text-sm text-gray-600 mb-2">Nodes: {data.nodes.length}, Edges: {data.edges.length}</div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h4 className="font-medium mb-2">Nodes:</h4>
+              <div className="space-y-1">
+                {data.nodes.map(node => (
+                  <div key={node.id} className="text-sm p-2 bg-gray-50 rounded">
+                    {node.name} ({node.type})
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h4 className="font-medium mb-2">Edges:</h4>
+              <div className="space-y-1">
+                {data.edges.map(edge => (
+                  <div key={`${edge.source}-${edge.target}`} className="text-sm p-2 bg-gray-50 rounded">
+                    {edge.source} → {edge.target}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div ref={cyRef} className="w-full h-96 mt-4 border border-gray-300" />
+        </div>
+      )}
       {selectedNode && (
         <div className="absolute top-4 right-4 bg-white p-4 rounded-lg shadow-lg border border-gray-200 max-w-sm">
           <h3 className="font-semibold text-gray-900 mb-2">{selectedNode.name}</h3>
