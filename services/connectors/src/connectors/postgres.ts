@@ -14,7 +14,7 @@ export const PostgresConnector: Connector = {
       assetType: 'TABLE',
       name: 'sample_table',
       namespace: 'public',
-      sourceSystem: 'postgres',
+      sourceSystem: 'pg',
       schema: { columns: [{ name: 'id', dataType: 'int4' }] },
       owners: [],
       updatedAt: now,
