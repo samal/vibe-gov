@@ -152,8 +152,9 @@ export class GovernanceRepository {
 
   // Data Assets
   async getDataAssets(): Promise<any[]> {
-    const result = await this.pool.query('SELECT * FROM data_assets ORDER BY name');
-    return result.rows.map(row => ({
+    // Get assets from data_assets table
+    const dataAssetsResult = await this.pool.query('SELECT * FROM data_assets ORDER BY name');
+    const dataAssets = dataAssetsResult.rows.map(row => ({
       id: row.id,
       name: row.name,
       namespace: row.namespace,
@@ -163,6 +164,42 @@ export class GovernanceRepository {
       owners: row.owners,
       updatedAt: row.updated_at,
     }));
+
+    // Get assets from audit logs (connector ingested assets)
+    const auditAssetsResult = await this.pool.query(`
+      SELECT DISTINCT 
+        metadata->>'assetId' as id,
+        metadata->>'name' as name,
+        metadata->>'namespace' as namespace,
+        metadata->>'sourceSystem' as source_system,
+        metadata->>'assetType' as asset_type,
+        metadata->'schema' as schema,
+        metadata->'owners' as owners,
+        created_at as updated_at
+      FROM audit_logs 
+      WHERE action = 'INGEST_ASSET' 
+      AND metadata->>'assetId' IS NOT NULL
+      ORDER BY name
+    `);
+    
+    const auditAssets = auditAssetsResult.rows.map(row => ({
+      id: row.id,
+      name: row.name,
+      namespace: row.namespace,
+      sourceSystem: row.source_system,
+      assetType: row.asset_type,
+      schema: row.schema,
+      owners: row.owners,
+      updatedAt: row.updated_at,
+    }));
+
+    // Combine and deduplicate by ID
+    const allAssets = [...dataAssets, ...auditAssets];
+    const uniqueAssets = allAssets.filter((asset, index, self) => 
+      index === self.findIndex(a => a.id === asset.id)
+    );
+
+    return uniqueAssets;
   }
 
   async getDataAssetById(id: string): Promise<any | null> {

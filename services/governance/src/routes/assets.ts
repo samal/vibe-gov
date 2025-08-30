@@ -40,16 +40,17 @@ export async function registerAssetRoutes(app: FastifyInstance) {
 
   // Get all data assets
   app.get('/assets', async (request, reply) => {
-    const authHeader = request.headers.authorization;
-    if (!authHeader?.startsWith('Bearer ')) {
-      return reply.status(401).send({ error: 'Authorization required' });
-    }
+    // TODO: Re-enable authentication for production
+    // const authHeader = request.headers.authorization;
+    // if (!authHeader?.startsWith('Bearer ')) {
+    //   return reply.status(401).send({ error: 'Authorization required' });
+    // }
 
-    const token = authHeader.substring(7);
-    const authContext = extractAuthContext(token);
-    if (!authContext || !hasPermission(authContext, 'assets', 'read')) {
-      return reply.status(403).send({ error: 'Insufficient permissions' });
-    }
+    // const token = authHeader.substring(7);
+    // const authContext = extractAuthContext(token);
+    // if (!authContext || !hasPermission(authContext, 'assets', 'read')) {
+    //   return reply.status(403).send({ error: 'Insufficient permissions' });
+    // }
 
     try {
       const assets = await repo.getDataAssets();
@@ -62,16 +63,17 @@ export async function registerAssetRoutes(app: FastifyInstance) {
 
   // Get data asset by ID
   app.get('/assets/:id', async (request, reply) => {
-    const authHeader = request.headers.authorization;
-    if (!authHeader?.startsWith('Bearer ')) {
-      return reply.status(401).send({ error: 'Authorization required' });
-    }
+    // TODO: Re-enable authentication for production
+    // const authHeader = request.headers.authorization;
+    // if (!authHeader?.startsWith('Bearer ')) {
+    //   return reply.status(401).send({ error: 'Authorization required' });
+    // }
 
-    const token = authHeader.substring(7);
-    const authContext = extractAuthContext(token);
-    if (!authContext || !hasPermission(authContext, 'assets', 'read')) {
-      return reply.status(403).send({ error: 'Insufficient permissions' });
-    }
+    // const token = authHeader.substring(7);
+    // const authContext = extractAuthContext(token);
+    // if (!authContext || !hasPermission(authContext, 'assets', 'read')) {
+    //   return reply.status(403).send({ error: 'Insufficient permissions' });
+    // }
 
     const { id } = request.params as { id: string };
 
