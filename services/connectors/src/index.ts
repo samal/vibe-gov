@@ -1,4 +1,5 @@
 import Fastify from 'fastify';
+import './harness.js'; // Run the connector harness
 
 const app = Fastify({ logger: true });
 

@@ -1,7 +1,8 @@
-import { runConnector } from './sdk/runner';
-import { PostgresConnector } from './connectors/postgres';
-import { TableauConnector } from './connectors/tableau';
-import { AssetEvent, LineageEvent } from './sdk/types';
+import { runConnector } from './sdk/runner.js';
+import { PostgresConnector } from './connectors/postgres.js';
+import { TableauConnector } from './connectors/tableau.js';
+import { MySQLConnector } from './connectors/mysql.js';
+import { AssetEvent, LineageEvent } from './sdk/types.js';
 import { Kafka, logLevel } from 'kafkajs';
 
 async function main() {
@@ -23,6 +24,7 @@ async function main() {
 
   await runConnector(PostgresConnector, context);
   await runConnector(TableauConnector, context);
+  await runConnector(MySQLConnector, context);
   await producer.disconnect();
 }
 

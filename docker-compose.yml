@@ -47,10 +47,10 @@ services:
     volumes:
       - kafka_data:/bitnami/kafka
     healthcheck:
-      test: ["CMD-SHELL", "unset KAFKA_JMX_OPTS; /opt/bitnami/kafka/bin/kafka-metadata-quorum.sh describe --status --bootstrap-server localhost:9092 >/dev/null 2>&1"]
-      interval: 10s
-      timeout: 5s
-      retries: 12
+      test: ["CMD-SHELL", "kafka-topics.sh --bootstrap-server localhost:9092 --list"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   connectors:
     build: ./services/connectors
