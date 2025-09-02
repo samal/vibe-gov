@@ -1,4 +1,4 @@
-# LineageNexus Milestones
+# vibeGov Milestones
 
 ## Milestone 1: Architecture & Platform Foundations ✅ COMPLETED
 - Deliverables:

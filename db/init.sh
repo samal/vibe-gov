@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# LineageNexus Database Initialization Script
+# vibeGov Database Initialization Script
 # This script sets up both PostgreSQL and Neo4j databases with seed data
 
 set -e
 
-echo "🚀 Starting LineageNexus Database Initialization..."
+echo "🚀 Starting vibeGov Database Initialization..."
 
 # Colors for output
 RED='\033[0;31m'

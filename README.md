@@ -1,10 +1,10 @@
-# LineageNexus - Data Governance & Lineage Platform
+# vibeGov - Data Governance & Lineage Platform
 
-A scalable, enterprise-grade Node.js application for end-to-end data governance and lineage tracking. LineageNexus serves as a central source of truth for an organization's data assets, providing a clear, visual map of the data journey across disparate systems.
+A scalable, enterprise-grade Node.js application for end-to-end data governance and lineage tracking. vibeGov serves as a central source of truth for an organization's data assets, providing a clear, visual map of the data journey across disparate systems.
 
 ## 🏗️ Architecture Overview
 
-LineageNexus employs a microservices architecture with the following components:
+vibeGov employs a microservices architecture with the following components:
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -140,7 +140,7 @@ graph TB
     M --> N
 ```
 
-## 🛠️ How to Run This System
+## 🛠️ How to Run vibeGov
 
 ### **Step 1: Prerequisites Setup**
 
@@ -174,8 +174,8 @@ sudo usermod -aG docker $USER
 
 ```bash
 # Clone the repository
-git clone https://github.com/samal/vibe-gov.git lineage
-cd lineage
+git clone https://github.com/samal/vibe-gov.git vibeGov
+cd vibeGov
 
 # Verify the structure
 ls -la
@@ -536,4 +536,4 @@ docker-compose logs [service-name] --tail=100
 
 ---
 
-**🎉 Congratulations!** You now have a fully functional LineageNexus system running with real MySQL integration, dynamic asset discovery, and comprehensive data governance capabilities.
+**🎉 Congratulations!** You now have a fully functional vibeGov system running with real MySQL integration, dynamic asset discovery, and comprehensive data governance capabilities.

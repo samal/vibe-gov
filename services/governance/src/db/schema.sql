@@ -1,4 +1,4 @@
--- Additional governance schema for LineageNexus
+-- Additional governance schema for vibeGov
 
 -- Masking rules table
 CREATE TABLE IF NOT EXISTS masking_rules (

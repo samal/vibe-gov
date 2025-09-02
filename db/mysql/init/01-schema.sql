@@ -1,4 +1,4 @@
--- MySQL Schema for LineageNexus
+-- MySQL Schema for vibeGov
 -- This file creates the database structure for the e-commerce sample data
 
 -- Create databases

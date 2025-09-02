@@ -1,7 +1,7 @@
-# LineageNexus Architecture
+# vibeGov Architecture
 
 ## Overview
-LineageNexus is a microservices-based platform for data governance and lineage. Core domains are separated into independently deployable services communicating via APIs and asynchronous events.
+vibeGov is a microservices-based platform for data governance and lineage. Core domains are separated into independently deployable services communicating via APIs and asynchronous events.
 
 ## Services
 - Connectors Service: pluggable ingestion from source systems (DBs, warehouses, BI, streams).

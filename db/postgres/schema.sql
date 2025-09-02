@@ -1,4 +1,4 @@
--- PostgreSQL initial schema for LineageNexus
+-- PostgreSQL initial schema for vibeGov
 CREATE TABLE IF NOT EXISTS roles (
   id SERIAL PRIMARY KEY,
   name VARCHAR(64) UNIQUE NOT NULL,

@@ -1,6 +1,6 @@
-# LineageNexus Database Setup and Seed Data
+# vibeGov Database Setup and Seed Data
 
-This directory contains the database setup files and seed data for the LineageNexus application.
+This directory contains the database setup files and seed data for the vibeGov application.
 
 ## Files Overview
 

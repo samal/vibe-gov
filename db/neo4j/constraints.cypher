@@ -1,4 +1,4 @@
-// Neo4j constraints for LineageNexus
+// Neo4j constraints for vibeGov
 CREATE CONSTRAINT unique_data_asset IF NOT EXISTS
 FOR (n:DataAsset)
 REQUIRE n.id IS UNIQUE;

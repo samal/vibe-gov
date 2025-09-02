@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for LineageNexus
+about: Suggest an idea for vibeGov
 labels: enhancement
 ---
 

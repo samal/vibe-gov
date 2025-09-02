@@ -1,4 +1,4 @@
--- MySQL Sample Data for LineageNexus
+-- MySQL Sample Data for vibeGov
 -- This file populates the database with realistic e-commerce sample data
 
 USE sales;

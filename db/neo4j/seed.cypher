@@ -1,4 +1,4 @@
-// LineageNexus Neo4j Seed Data
+// vibeGov Neo4j Seed Data
 // This file contains initial data to populate the Neo4j graph database on first startup
 
 // Clear existing data (optional - uncomment if you want to start fresh)

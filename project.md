@@ -1,7 +1,7 @@
-Project Title: "LineageNexus" - A Scalable Data Governance and Lineage Platform
+Project Title: "vibeGov" - A Scalable Data Governance and Lineage Platform
 
 1. Executive Summary
-The objective is to architect and develop LineageNexus, a highly scalable, enterprise-grade Node.js application for end-to-end data governance and lineage tracking. The platform will serve as a central source of truth for an organization's data assets, providing a clear, visual map of the data journey across disparate systems. It will empower data stewards, analysts, and compliance officers by offering detailed insights into data provenance, transformation history, and usage, while enforcing rigorous security and privacy controls.
+The objective is to architect and develop vibeGov, a highly scalable, enterprise-grade Node.js application for end-to-end data governance and lineage tracking. The platform will serve as a central source of truth for an organization's data assets, providing a clear, visual map of the data journey across disparate systems. It will empower data stewards, analysts, and compliance officers by offering detailed insights into data provenance, transformation history, and usage, while enforcing rigorous security and privacy controls.
 
 2. Core Architecture & Technology Stack
 Architectural Pattern: Employ a microservices architecture to ensure modularity, scalability, and independent deployment of services (e.g., Connectors Service, Metadata Ingestion Service, Lineage API, Governance Engine, Web UI Service).
