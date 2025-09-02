@@ -208,6 +208,14 @@ docker exec -i lineage_mysql mysql -u lineage -plineage -e "USE sales; SELECT CO
 docker exec -i lineage_neo4j cypher-shell -u neo4j -p lineage123 "MATCH (n:DataAsset) RETURN count(n) as total_assets;"
 ```
 
+### **📖 Detailed Database Setup Instructions:**
+For complete database initialization, schema setup, and detailed seed data instructions, see:
+- **`db/README.md`** - Comprehensive database setup guide
+- **`db/init.sh`** - Automated database initialization script
+- **`db/postgres/seed.sql`** - PostgreSQL seed data and schema
+- **`db/neo4j/seed.cypher`** - Neo4j graph data and relationships
+- **`db/mysql/init/`** - MySQL schema and sample e-commerce data
+
 ## 🛠️ How to Run vibeGov
 
 ### **Step 1: Prerequisites Setup**
@@ -393,6 +401,20 @@ docker exec -i lineage_neo4j cypher-shell -u neo4j -p lineage123 "MATCH (n:DataA
 3. Use credentials:
    - **Email**: `admin@lineage.com`
    - **Password**: `test123` (or any password for demo)
+
+#### **📋 Need to Set Up Databases from Scratch?**
+If you're starting with empty databases or need to reinitialize:
+```bash
+# Run the automated database setup script
+./db/init.sh
+
+# Or manually run individual scripts:
+# PostgreSQL: docker exec -i lineage_postgres psql -U lineage -d lineage < db/postgres/schema.sql
+# MySQL: docker exec -i lineage_mysql mysql -u lineage -plineage < db/mysql/init/01-schema.sql
+# Neo4j: docker exec -i lineage_neo4j cypher-shell -u neo4j -p lineage123 < db/neo4j/seed.cypher
+```
+
+**📖 Full Setup Guide**: See `db/README.md` for detailed instructions
 
 ### **Step 8: Explore the System**
 
@@ -601,8 +623,13 @@ docker-compose logs [service-name] --tail=100
 - **Resource usage**: `docker stats`
 - **Documentation**: 
   - `MYSQL_SETUP_SUMMARY.md` - MySQL integration details
-  - `db/README.md` - Database setup and seed data
+  - `db/README.md` - **Database setup and seed data** ⭐
   - `docs/` - Architecture and technical documentation
+- **Database Setup**: 
+  - `db/init.sh` - **Automated database initialization** 🚀
+  - `db/postgres/seed.sql` - PostgreSQL seed data
+  - `db/neo4j/seed.cypher` - Neo4j graph data
+  - `db/mysql/init/` - MySQL schema and sample data
 - **Issues**: Check GitHub issues or create new one
 - **Community**: Join discussions in GitHub discussions
 
