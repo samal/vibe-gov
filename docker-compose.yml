@@ -17,6 +17,24 @@ services:
       timeout: 5s
       retries: 5
 
+  mysql:
+    image: mysql:8.0
+    container_name: lineage_mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=lineage123
+      - MYSQL_DATABASE=lineage
+      - MYSQL_USER=lineage
+      - MYSQL_PASSWORD=lineage
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'lineage', '-plineage']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   neo4j:
     image: neo4j:5
     container_name: lineage_neo4j
@@ -49,7 +67,7 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "kafka-topics.sh --bootstrap-server localhost:9092 --list"]
       interval: 30s
-      timeout: 10s
+      timeout: 5s
       retries: 5
 
   connectors:
@@ -58,10 +76,17 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      mysql:
+        condition: service_healthy
       kafka:
         condition: service_healthy
     environment:
       - PORT=3001
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_USER=lineage
+      - MYSQL_PASSWORD=lineage
+      - MYSQL_DATABASE=lineage
     ports:
       - '3001:3001'
 
@@ -113,5 +138,6 @@ services:
 
 volumes:
   postgres_data:
+  mysql_data:
   neo4j_data:
   kafka_data: 

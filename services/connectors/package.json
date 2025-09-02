@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "fastify": "^4.28.1",
-    "kafkajs": "^2.2.4"
+    "kafkajs": "^2.2.4",
+    "mysql2": "^3.9.2"
   },
   "devDependencies": {
     "typescript": "^5.4.5",
