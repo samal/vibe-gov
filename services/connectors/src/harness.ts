@@ -22,10 +22,48 @@ async function main() {
     logger: { info: console.log, error: console.error },
   };
 
+  console.log('Starting connectors with continuous polling...');
+  
+  // Run all connectors - they will start their polling operations
   await runConnector(PostgresConnector, context);
   await runConnector(TableauConnector, context);
   await runConnector(MySQLConnector, context);
-  await producer.disconnect();
+  
+  console.log('All connectors started. Keeping process alive for continuous polling...');
+  
+  // Keep the process alive for continuous polling
+  // The connectors will run their polling operations in the background
+  process.on('SIGINT', async () => {
+    console.log('Shutting down connectors...');
+    
+    // Shutdown all connectors gracefully
+    await PostgresConnector.shutdown?.(context);
+    await TableauConnector.shutdown?.(context);
+    await MySQLConnector.shutdown?.(context);
+    
+    await producer.disconnect();
+    console.log('Shutdown complete');
+    process.exit(0);
+  });
+  
+  process.on('SIGTERM', async () => {
+    console.log('Received SIGTERM, shutting down...');
+    
+    // Shutdown all connectors gracefully
+    await PostgresConnector.shutdown?.(context);
+    await TableauConnector.shutdown?.(context);
+    await MySQLConnector.shutdown?.(context);
+    
+    await producer.disconnect();
+    console.log('Shutdown complete');
+    process.exit(0);
+  });
+  
+  // Keep the process running
+  setInterval(() => {
+    // Heartbeat to keep the process alive
+    console.log('Connectors running...');
+  }, 60000); // Log every minute
 }
 
 main().catch((e) => {
