@@ -45,6 +45,17 @@ vibeGov employs a microservices architecture with the following components:
                     └─────────────────┘
 ```
 
+## 📸 Platform Screenshots
+
+### Dashboard Overview
+![vibeGov Dashboard](images/1.png)
+
+### Data Lineage Visualization
+![Data Lineage Graph](images/2.png)
+
+### Governance Interface
+![Governance Dashboard](images/3.png)
+
 ## ✨ **Key Features**
 
 - **🔍 Data Discovery**: Dynamic asset discovery from PostgreSQL, MySQL, and Tableau
