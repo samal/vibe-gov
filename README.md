@@ -35,7 +35,24 @@ vibeGov employs a microservices architecture with the following components:
                     │   Port: 9092    │    │   Database      │
                     └─────────────────┘    │   Port: 7474    │
                                            └─────────────────┘
+                                 │
+                    ┌─────────────────┐
+                    │   MySQL         │
+                    │   Database      │
+                    │   Port: 3306    │
+                    └─────────────────┘
 ```
+
+## ✨ **Key Features**
+
+- **🔍 Data Discovery**: Dynamic asset discovery from PostgreSQL, MySQL, and Tableau
+- **📊 Lineage Tracking**: End-to-end data flow visualization with column-level lineage
+- **🛡️ Data Governance**: Role-based access control, data classification, and masking rules
+- **📈 Real-time Monitoring**: Live data quality checks and schema change detection
+- **🔐 Security**: JWT authentication, audit logging, and compliance tracking
+- **📱 Modern UI**: React-based interface with interactive lineage graphs
+- **🐳 Containerized**: Full Docker support with health checks and monitoring
+- **📊 Multi-Database**: Support for PostgreSQL, MySQL, and Neo4j
 
 ## 🚀 Quick Start
 
@@ -48,8 +65,8 @@ vibeGov employs a microservices architecture with the following components:
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd lineage
+git clone https://github.com/samal/vibe-gov.git vibeGov
+cd vibeGov
 ```
 
 ### 2. Start All Services
@@ -83,6 +100,35 @@ curl http://localhost:3005/lineage-api/lineage/graph
 curl http://localhost:3005/api/v1/assets
 ```
 
+## 📊 **Current System Status**
+
+**✅ Fully Operational** - All services running with latest features:
+
+- **Databases**: PostgreSQL 16.10, MySQL 8.0.43, Neo4j 5.x
+- **APIs**: Governance, Lineage, Connectors, Ingestion services
+- **UI**: React-based Web UI with rebranded vibeGov interface
+- **Connectors**: Dynamic MySQL discovery, PostgreSQL metadata, Tableau integration
+- **Security**: JWT authentication, RBAC, audit logging
+- **Monitoring**: Health checks, real-time logging, performance metrics
+
+## 🔄 **Recent Updates & Improvements**
+
+**Latest Release - vibeGov v1.0.0** 🎉
+
+### **Major Enhancements:**
+- **🔄 Complete Rebranding**: Renamed from LineageNexus to vibeGov
+- **🐬 MySQL Integration**: Real-time dynamic asset discovery from MySQL databases
+- **📊 Enhanced UI**: Updated React components with new branding
+- **🔍 Dynamic Discovery**: Connectors now automatically discover database schemas
+- **📚 Comprehensive Docs**: Step-by-step setup guide and troubleshooting
+- **🐳 Docker Optimization**: Improved container health checks and startup sequence
+
+### **Technical Improvements:**
+- **Database Support**: PostgreSQL 16, MySQL 8.0, Neo4j 5.x
+- **API Enhancements**: Better error handling and response formatting
+- **Security**: Enhanced JWT authentication and role-based permissions
+- **Monitoring**: Real-time service health monitoring and logging
+
 ## 📊 Data Flow Diagram
 
 ```mermaid
@@ -95,7 +141,7 @@ graph TB
 
     subgraph "Connector Layer"
         D[PostgreSQL Connector]
-        E[MySQL Connector]
+        E[MySQL Connector<br/>Dynamic Discovery]
         F[Tableau Connector]
     end
 
@@ -105,18 +151,18 @@ graph TB
     end
 
     subgraph "Data Storage"
-        I[Neo4j Graph Database]
-        J[PostgreSQL Metadata]
-        K[Audit Logs]
+        I[Neo4j Graph Database<br/>Lineage & Relationships]
+        J[PostgreSQL Metadata<br/>Users, Roles, Audit]
+        K[Audit Logs<br/>Compliance Tracking]
     end
 
     subgraph "API Layer"
-        L[Lineage API]
-        M[Governance API]
+        L[Lineage API<br/>Graph Queries]
+        M[Governance API<br/>RBAC & Policies]
     end
 
     subgraph "Frontend"
-        N[React Web UI]
+        N[React Web UI<br/>vibeGov Interface]
     end
 
     A --> D
@@ -138,6 +184,28 @@ graph TB
     
     L --> N
     M --> N
+```
+
+## 🗄️ **Database Setup & Sample Data**
+
+### **Pre-configured Databases:**
+- **PostgreSQL**: Core metadata, user management, audit logs
+- **MySQL**: E-commerce sample data (sales, inventory, finance)
+- **Neo4j**: Graph relationships, lineage mapping, data quality rules
+
+### **Sample Data Includes:**
+- **Users & Roles**: Admin, Data Steward, Engineer, Analyst, Viewer
+- **Data Assets**: 20+ tables, views, and reports across systems
+- **Classifications**: PII, Financial, Internal, Public, Restricted
+- **Lineage**: Cross-system data flows and transformations
+- **Governance**: Masking rules, audit trails, compliance policies
+
+### **Quick Data Verification:**
+```bash
+# Check sample data counts
+docker exec -i lineage_postgres psql -U lineage -d lineage -c "SELECT COUNT(*) as users FROM users;"
+docker exec -i lineage_mysql mysql -u lineage -plineage -e "USE sales; SELECT COUNT(*) as customers FROM customers;"
+docker exec -i lineage_neo4j cypher-shell -u neo4j -p lineage123 "MATCH (n:DataAsset) RETURN count(n) as total_assets;"
 ```
 
 ## 🛠️ How to Run vibeGov
@@ -531,8 +599,12 @@ docker-compose logs [service-name] --tail=100
 - **Check logs**: `docker-compose logs [service-name]`
 - **Service status**: `docker-compose ps`
 - **Resource usage**: `docker stats`
-- **Documentation**: See `MYSQL_SETUP_SUMMARY.md` for MySQL details
+- **Documentation**: 
+  - `MYSQL_SETUP_SUMMARY.md` - MySQL integration details
+  - `db/README.md` - Database setup and seed data
+  - `docs/` - Architecture and technical documentation
 - **Issues**: Check GitHub issues or create new one
+- **Community**: Join discussions in GitHub discussions
 
 ---
 
