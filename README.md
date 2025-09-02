@@ -2,6 +2,8 @@
 
 A scalable, enterprise-grade Node.js application for end-to-end data governance and lineage tracking. vibeGov serves as a central source of truth for an organization's data assets, providing a clear, visual map of the data journey across disparate systems.
 
+> **🤖 AI-Generated Application**: This application was developed using AI assistance to demonstrate modern data governance and lineage tracking capabilities. It showcases best practices in microservices architecture, database design, and full-stack development.
+
 ## 🏗️ Architecture Overview
 
 vibeGov employs a microservices architecture with the following components:
@@ -114,6 +116,8 @@ curl http://localhost:3005/api/v1/assets
 ## 🔄 **Recent Updates & Improvements**
 
 **Latest Release - vibeGov v1.0.0** 🎉
+
+> **💡 Development Note**: This application was built using AI assistance, demonstrating how modern AI tools can accelerate the development of complex enterprise applications while maintaining high code quality and architectural best practices.
 
 ### **Major Enhancements:**
 - **🔄 Complete Rebranding**: Renamed from LineageNexus to vibeGov
@@ -636,3 +640,7 @@ docker-compose logs [service-name] --tail=100
 ---
 
 **🎉 Congratulations!** You now have a fully functional vibeGov system running with real MySQL integration, dynamic asset discovery, and comprehensive data governance capabilities.
+
+---
+
+> **🤖 AI Development Acknowledgement**: This application was developed with the assistance of AI tools, showcasing the potential of AI-assisted development in creating production-ready enterprise applications. The code demonstrates modern development practices, comprehensive documentation, and robust architecture patterns that can serve as a reference for similar projects.
