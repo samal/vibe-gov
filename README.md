@@ -174,7 +174,7 @@ sudo usermod -aG docker $USER
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/lineage.git
+git clone https://github.com/samal/vibe-gov.git lineage
 cd lineage
 
 # Verify the structure
